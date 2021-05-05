@@ -1,0 +1,159 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Local CCTV videos preprocessing:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from PIL import Image\n",
+    "from os import listdir\n",
+    "from os.path import isfile, join, isdir"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Train video frame extraction and convert to TIFF:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import cv2\n",
+    "vidcap = cv2.VideoCapture('CCTV/train.mp4')\n",
+    "success,image = vidcap.read()\n",
+    "count = 1\n",
+    "while success:\n",
+    "    cv2.imwrite(\"CCTV/train_frames/%d.jpg\" % count, image)     # save frame as JPEG file      \n",
+    "    success,image = vidcap.read()\n",
+    "    count += 1\n",
+    "print(count)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "count = 1\n",
+    "for image in listdir('CCTV/train_frames/'):\n",
+    "    im = Image.open(join('CCTV/train_frames/', image))\n",
+    "    im.save(\"CCTV/train_tiff_frames/\"+ str(count) +\".tif\", 'TIFF')\n",
+    "    count = count + 1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "First test video frame extraction and convert to TIFF:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import cv2\n",
+    "vidcap = cv2.VideoCapture('CCTV/test.mp4')\n",
+    "success,image = vidcap.read()\n",
+    "count = 1\n",
+    "while success:\n",
+    "    cv2.imwrite(\"CCTV/test_frames/%d.jpg\" % count, image)     # save frame as JPEG file      \n",
+    "    success,image = vidcap.read()\n",
+    "    count += 1\n",
+    "print(count)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "count = 1\n",
+    "for image in listdir('CCTV/test_frames/'):\n",
+    "    if (count <= 3399 or image[-3:] != 'jpg'):\n",
+    "        count = count + 1\n",
+    "        continue\n",
+    "    im = Image.open(join('CCTV/test_frames/', image))\n",
+    "    im.save(\"CCTV/test_tiff_frames/\"+ str(count) +\".tif\", 'TIFF')\n",
+    "    count = count + 1\n",
+    "print(count)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Second test video frame extraction and convert to TIFF:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import cv2\n",
+    "vidcap = cv2.VideoCapture('CCTV/test_2.mp4')\n",
+    "success,image = vidcap.read()\n",
+    "count = 1\n",
+    "while success:\n",
+    "    cv2.imwrite(\"CCTV/test_frames_2/%d.jpg\" % count, image)     # save frame as JPEG file      \n",
+    "    success,image = vidcap.read()\n",
+    "    count += 1\n",
+    "print(count)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "count = 1\n",
+    "for image in listdir('CCTV/test_frames_2/'):\n",
+    "    im = Image.open(join('CCTV/test_frames_2/', image))\n",
+    "    im.save(\"CCTV/test_tiff_frames_2/\"+ str(count) +\".tif\", 'TIFF')\n",
+    "    count = count + 1\n",
+    "print(count)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Tensorflow (AI kit)",
+   "language": "python",
+   "name": "c009-intel_distribution_of_python_3_oneapi-beta05-tf"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
