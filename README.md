@@ -27,7 +27,7 @@ Polar is designed to solve this problem, as it’s unsupervised, it depends on t
 
 * Auto-encoder
 
-The auto-encoder is used to learn the underlying patterns in training frames. After that, it's used to regenerate the testing frames, and frames that differ from the ones it was trained on, they will be generated with low accuracy.
+    The auto-encoder is used to learn the underlying patterns in training frames. After that, it's used to regenerate the testing frames, and frames that differ from the ones it was trained on, they will be generated with low accuracy.
 
 	Polar uses a convolutional LSTM auto-encoder, which is designed to remember information for long periods of time as well as forgetting a part of the stored data over time.
 
@@ -38,5 +38,4 @@ The auto-encoder is used to learn the underlying patterns in training frames. Af
 
 * One Class SVM
 
-It's an unsupervised machine learning model which is trained on one class of
-the data you have, and in the test its job is to classify the provided data into normal which is the same as the one it was trained on, or not normal which is anything else. In our case, the training set consisted of normal frames only, and the test set consisted of both normal and anomalous frames which we used the model to classify. The labels provided by the model are either one which indicates that the corresponding frame is normal, and negative one which indicates that frame consists an anomaly.
+    It's an unsupervised machine learning model which is trained on one class of the data you have, and in the test its job is to classify the provided data into normal which is the same as the one it was trained on, or not normal which is anything else. In our case, the training set consisted of normal frames only, and the test set consisted of both normal and anomalous frames which we used the model to classify. The labels provided by the model are either one which indicates that the corresponding frame is normal, and negative one which indicates that frame consists an anomaly.
